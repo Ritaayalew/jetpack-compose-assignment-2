@@ -36,7 +36,7 @@ fun TodoItemCard(
     val todoColors = getTodoColors(todo = todo)
 
     Card(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth().padding(vertical = 4.dp, horizontal = 2.dp),
         shape = RoundedCornerShape(24.dp),
         onClick = onCardClick,
         colors = CardDefaults.cardColors(containerColor = todoColors.backgroundColor)
@@ -71,7 +71,7 @@ fun TodoItemCardPreview(){
         TodoItemCard(
             TodoItem(
                 title = "Subscribe to my channel & like this video ",
-                completed = true,
+                completed = false,
                 userId = 2,
                 id = 0
             ),
