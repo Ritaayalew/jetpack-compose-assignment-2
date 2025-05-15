@@ -1,11 +1,13 @@
-package com.example.trial_junior.core.presentation.components
+package com.example.taskvibe_app.core.presentation.components
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Archive
 
 import androidx.compose.material.icons.filled.CheckCircle
+import androidx.compose.material.icons.filled.CheckCircleOutline
 
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.DeleteOutline
@@ -20,25 +22,25 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.unit.dp
-import com.example.trial_junior.core.util.ContentDescriptions
+import com.example.taskvibe_app.core.util.ContentDescriptions
 
 
 @Composable
-fun HostedButton(
-    onToggleHostedClick: () -> Unit,
+fun CompleteButton(
+    onCompleteClick: () -> Unit,
     color: Color,
-    upcoming: Boolean,
+    completed: Boolean,
     modifier: Modifier = Modifier
 ){
     IconButton(onClick = {
-        onToggleHostedClick()
+        onCompleteClick()
     },
         modifier = modifier
     ) {
-        if(!upcoming){
+        if(completed){
             Icon(
-                imageVector = Icons.Default.CheckCircle,
-                contentDescription = ContentDescriptions.USE_ITEM,
+                imageVector = Icons.Default.CheckCircleOutline,
+                contentDescription = ContentDescriptions.COMPLETE_TODO_ITEM,
                 tint = color,
                 modifier = Modifier.size(48.dp)
             )
@@ -64,20 +66,19 @@ fun EmptyCircle(color: Color, strokeWidth: Float = 9f){
         }
     )
 }
-
 @Composable
-fun EditButton(
-    onEditClick: () -> Unit,
+fun ArchiveButton(
+    onArchiveClick: () -> Unit,
     color: Color = MaterialTheme.colorScheme.secondary,
     modifier: Modifier = Modifier
 ){
     IconButton(
-        onClick = onEditClick,
+        onClick = onArchiveClick,
         modifier = modifier
     ) {
         Icon(
-            imageVector = Icons.Default.FolderOpen,
-            contentDescription = ContentDescriptions.UPDATE_ITEM,
+            imageVector = Icons.Default.Archive,
+            contentDescription = ContentDescriptions.ARCHIVE_TODO_ITEM,
             tint = color,
             modifier = Modifier.size(32.dp)
         )
@@ -94,8 +95,8 @@ fun DeleteButton(
         modifier = modifier
     ) {
         Icon(
-            imageVector = Icons.Default.DeleteOutline,
-            contentDescription = ContentDescriptions.DELETE_ITEM,
+            imageVector = Icons.Default.Delete,
+            contentDescription = ContentDescriptions.DELETE_TODO_ITEM,
             tint = MaterialTheme.colorScheme.error,
             modifier = Modifier.size(32.dp)
         )

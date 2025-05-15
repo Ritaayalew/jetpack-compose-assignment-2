@@ -1,26 +1,26 @@
-package com.example.trial_junior.core.presentation.components
+package com.example.taskvibe_app.core.presentation.components
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
-import com.example.trial_junior.feature_junior.domain.model.InvitationItem
+import com.example.taskvibe_app.feature_taskVibe.domain.model.TodoItem
 
-
-data class ItemColors(
+data class TodoItemColors(
     val backgroundColor: Color,
     val textColor: Color,
-    val editIconColor: Color,
+    val archiveIconColor: Color,
     val checkColor: Color
 )
 
 @Composable
-fun getItemColors(invitation: InvitationItem): ItemColors {
-    return ItemColors(
-            backgroundColor = MaterialTheme.colorScheme.background.copy(alpha = 0.9f),
-            textColor = MaterialTheme.colorScheme.onBackground,
-            editIconColor = MaterialTheme.colorScheme.onBackground,
-            checkColor = if(invitation.upcoming) MaterialTheme.colorScheme.onBackground
-            else MaterialTheme.colorScheme.tertiary
-        )
+fun getTodoColors(todo: TodoItem): TodoItemColors {
+
+    return TodoItemColors(
+        backgroundColor = MaterialTheme.colorScheme.secondary.copy(alpha = 0.6f),
+        textColor = MaterialTheme.colorScheme.onSecondary,
+        archiveIconColor = MaterialTheme.colorScheme.onSecondary,
+        checkColor = if(todo.completed) MaterialTheme.colorScheme.tertiaryContainer
+        else MaterialTheme.colorScheme.onSecondary
+    )
 
 }
