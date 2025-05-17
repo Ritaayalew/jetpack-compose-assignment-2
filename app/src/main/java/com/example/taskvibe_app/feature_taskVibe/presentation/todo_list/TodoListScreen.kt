@@ -13,10 +13,12 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
@@ -29,9 +31,11 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -39,6 +43,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.taskvibe_app.R
 import com.example.taskvibe_app.feature_taskVibe.presentation.todo_list.components.TodoItemCard
+import com.example.taskvibe_app.feature_taskVibe.presentation.todo_new_update.TodoNewUpdateEvent
+import com.example.taskvibe_app.feature_taskVibe.presentation.util.Screen
 import com.example.taskvibe_app.ui.theme.TaskVibe_AppTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -56,35 +62,22 @@ fun TodoListScreen(
 
     TaskVibe_AppTheme {
         Scaffold(
-            floatingActionButton = {
-                FloatingActionButton(
-                    onClick = {
-                        navController.navigate("todo_new_update")
-                    },
-                    shape = CircleShape,
-                    containerColor = MaterialTheme.colorScheme.primary
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Add,
-                        contentDescription = "Add Todo",
-                        tint = MaterialTheme.colorScheme.onPrimary
-                    )
-                }
-            },
             topBar = {
                 TopAppBar(
                     title = {
                         Text(
-                            text = "Todo List",
+                            modifier = Modifier.padding(vertical = 6.dp),
+                            text = "TaskVibe",
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
-                            style = MaterialTheme.typography.headlineLarge,
+                            style = MaterialTheme.typography.headlineMedium,
                             color = MaterialTheme.colorScheme.onPrimary
                         )
                     },
                     colors = TopAppBarDefaults.topAppBarColors(
-                        containerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.7f),
-                        titleContentColor = MaterialTheme.colorScheme.onPrimary
+                        containerColor = Color.Black.copy(alpha = 0.8f),
+                        titleContentColor = MaterialTheme.colorScheme.onPrimary,
+                        navigationIconContentColor = MaterialTheme.colorScheme.onPrimary
                     )
                 )
             },
@@ -97,36 +90,34 @@ fun TodoListScreen(
                     .background(color = MaterialTheme.colorScheme.background)
                     .padding(padding)
             ) {
-                // Optional: Add background image if available
-                /*
-                Image(
-                    painter = painterResource(id = R.drawable.background_portrait),
-                    contentDescription = "Background Image",
-                    contentScale = ContentScale.FillWidth,
-                    modifier = Modifier.fillMaxSize(),
-                    alignment = Alignment.TopStart
-                )
-                */
                 Column(
                     modifier = Modifier.fillMaxSize()
                 ) {
+                    // "My Tasks" text below top app bar
+                    Text(
+                        text = "My Tasks",
+                        fontSize = 24.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onBackground,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 16.dp, vertical = 14.dp)
+                    )
                     LazyColumn(
                         modifier = Modifier
                             .fillMaxSize()
                             .padding(horizontal = 12.dp)
-                            .padding(top = 8.dp)
                     ) {
                         items(state.todoItems) { todo ->
                             TodoItemCard(
                                 todo = todo,
                                 modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(4.dp),
+                                    .fillMaxWidth(),
                                 onCompleteClick = {
                                     // Handle completion toggle (add to ViewModel if needed)
                                 },
                                 onCardClick = {
-                                    navController.navigate("todo_new_update?todoId=${todo.id}")
+                                    navController.navigate(Screen.TodoNewUpdateScreen.route + "?todoId=${todo.id}")
                                 }
                             )
                         }

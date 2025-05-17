@@ -5,11 +5,14 @@ import androidx.room.Room
 import com.example.taskvibe_app.feature_taskVibe.data.local.TodoDao
 import com.example.taskvibe_app.feature_taskVibe.data.local.TodoDatabase
 import com.example.taskvibe_app.feature_taskVibe.data.remote.TodoApi
+import com.example.taskvibe_app.feature_taskVibe.data.repo.TodoListRepoImpl
+import com.example.taskvibe_app.feature_taskVibe.domain.repo.TodoListRepo
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineDispatcher
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -50,5 +53,10 @@ object TodoModule {
             TodoDatabase::class.java,
             "todo_database"
         ).fallbackToDestructiveMigration().build()
+    }
+    @Provides
+    @Singleton
+    fun providesTodoRepo(db: TodoDatabase, api: TodoApi, @IoDispatcher dispatcher: CoroutineDispatcher): TodoListRepo {
+        return TodoListRepoImpl(db.dao, api, dispatcher)
     }
 }

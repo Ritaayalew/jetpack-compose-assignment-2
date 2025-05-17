@@ -23,11 +23,13 @@ import com.example.taskvibe_app.feature_taskVibe.presentation.todo_list.TodoList
 import com.example.taskvibe_app.feature_taskVibe.presentation.todo_new_update.TodoNewUpdateScreen
 import com.example.taskvibe_app.feature_taskVibe.presentation.util.Screen
 import com.example.taskvibe_app.ui.theme.TaskVibe_AppTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContent {
             TaskVibe_AppTheme {
                 // A surface container using the 'background' color from the theme
@@ -58,7 +60,7 @@ class MainActivity : ComponentActivity() {
                             )
                         ){
                             TodoNewUpdateScreen(
-                                navController = navController
+                                navController = navController,
                             )
                         }
                     }

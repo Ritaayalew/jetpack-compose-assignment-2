@@ -3,8 +3,10 @@ package com.example.taskvibe_app.feature_taskVibe.presentation.todo_list.compone
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -14,6 +16,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -32,45 +35,55 @@ fun TodoItemCard(
     modifier: Modifier = Modifier,
     onCompleteClick: () -> Unit,
     onCardClick: () -> Unit,
-){
+) {
     val todoColors = getTodoColors(todo = todo)
 
     Card(
-        modifier = modifier.fillMaxWidth().padding(vertical = 4.dp, horizontal = 2.dp),
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(10.dp),
         shape = RoundedCornerShape(24.dp),
         onClick = onCardClick,
-        colors = CardDefaults.cardColors(containerColor = todoColors.backgroundColor)
+        elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
     ) {
-        Row(
-            modifier = modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.Start
-        ){
-            CompleteButton(onCompleteClick, todoColors.checkColor, todo.completed)
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(12.dp),
+            verticalArrangement = Arrangement.Top
+        ) {
             Text(
                 text = todo.title,
                 style = MaterialTheme.typography.headlineMedium,
                 fontWeight = FontWeight.Bold,
                 color = todoColors.textColor,
-                fontSize = 32.sp,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis
+                fontSize = 20.sp,
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 8.dp)
             )
-        }
-        Row (
-            verticalAlignment = Alignment.Top
-        ){
-
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.End,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Spacer(modifier = Modifier.width(3.dp))
+                CompleteButton(onCompleteClick, todoColors.checkColor, todo.completed)
+            }
         }
     }
 }
 
 @Preview
 @Composable
-fun TodoItemCardPreview(){
+fun TodoItemCardPreview() {
     TaskVibe_AppTheme {
         TodoItemCard(
             TodoItem(
-                title = "Subscribe to my channel & like this video ",
+                title = "Cook meal",
                 completed = false,
                 userId = 2,
                 id = 0
@@ -80,3 +93,4 @@ fun TodoItemCardPreview(){
         )
     }
 }
+

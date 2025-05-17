@@ -4,14 +4,12 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Save
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -35,6 +33,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.taskvibe_app.feature_taskVibe.presentation.todo_new_update.components.DetailedTodoCard
 import com.example.taskvibe_app.ui.theme.TaskVibe_AppTheme
 import kotlinx.coroutines.flow.collectLatest
 
@@ -54,7 +53,7 @@ fun TodoNewUpdateScreen(
                     navController.navigateUp()
                 }
                 TodoNewUpdateViewModel.UiEvent.SaveTodo -> {
-                    navController.navigateUp()
+                    // No-op: Save functionality removed
                 }
                 is TodoNewUpdateViewModel.UiEvent.ShowSnackbar -> {
                     snackbarHostState.showSnackbar(
@@ -67,26 +66,12 @@ fun TodoNewUpdateScreen(
 
     TaskVibe_AppTheme {
         Scaffold(
-            floatingActionButton = {
-                FloatingActionButton(
-                    onClick = {
-                        viewModel.onEvent(TodoNewUpdateEvent.SaveTodo)
-                    },
-                    shape = CircleShape,
-                    containerColor = MaterialTheme.colorScheme.primary
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Save,
-                        contentDescription = "Save Todo",
-                        tint = MaterialTheme.colorScheme.onPrimary
-                    )
-                }
-            },
             topBar = {
                 TopAppBar(
                     title = {
                         Text(
-                            text = if (viewModel.state.value.todo.id == 0) "New Todo" else "Edit Todo",
+                            modifier = Modifier.padding(vertical = 6.dp),
+                            text = "TaskVibe",
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
                             style = MaterialTheme.typography.headlineMedium,
@@ -108,7 +93,7 @@ fun TodoNewUpdateScreen(
                         }
                     },
                     colors = TopAppBarDefaults.topAppBarColors(
-                        containerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.7f),
+                        containerColor = Color.Black.copy(alpha = 0.8f),
                         titleContentColor = MaterialTheme.colorScheme.onPrimary,
                         navigationIconContentColor = MaterialTheme.colorScheme.onPrimary
                     )
@@ -128,30 +113,7 @@ fun TodoNewUpdateScreen(
                         .fillMaxSize()
                         .padding(horizontal = 16.dp, vertical = 16.dp)
                 ) {
-                    TextField(
-                        value = state.todo.title,
-                        onValueChange = {
-                            viewModel.onEvent(TodoNewUpdateEvent.EnteredTitle(it))
-                        },
-                        label = {
-                            if (state.isTitleHintVisible) {
-                                Text("Title")
-                            }
-                        },
-                        singleLine = true,
-                        textStyle = MaterialTheme.typography.bodyLarge.copy(fontSize = 40.sp),
-                        colors = TextFieldDefaults.colors(
-                            focusedTextColor = MaterialTheme.colorScheme.onBackground,
-                            unfocusedTextColor = MaterialTheme.colorScheme.onBackground,
-                            focusedContainerColor = Color.Transparent,
-                            unfocusedContainerColor = Color.Transparent,
-                            focusedIndicatorColor = MaterialTheme.colorScheme.primary,
-                            unfocusedIndicatorColor = MaterialTheme.colorScheme.onSurface
-                        ),
-                        keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences),
-                        modifier = Modifier.fillMaxWidth(),
-                        isError = state.error != null
-                    )
+
                     if (state.error != null) {
                         Text(
                             text = state.error,
@@ -160,6 +122,16 @@ fun TodoNewUpdateScreen(
                             fontSize = 16.sp
                         )
                     }
+                    // Add DetailedTodoCard to display task details
+                    DetailedTodoCard(
+                        title = state.todo.title,
+                        taskId = state.todo.id,
+                        userId = state.todo.userId,
+                        completed = state.todo.completed,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 16.dp)
+                    )
                     if (state.isLoading) {
                         Box(
                             modifier = Modifier

@@ -16,11 +16,10 @@ data class TodoItemColors(
 fun getTodoColors(todo: TodoItem): TodoItemColors {
 
     return TodoItemColors(
-        backgroundColor = MaterialTheme.colorScheme.secondary.copy(alpha = 0.6f),
-        textColor = MaterialTheme.colorScheme.onSecondary,
+        backgroundColor = MaterialTheme.colorScheme.surfaceDim.copy(alpha = 0.6f),
+        textColor = Color.Black,
         archiveIconColor = MaterialTheme.colorScheme.onSecondary,
-        checkColor = if(todo.completed) MaterialTheme.colorScheme.tertiaryContainer
-        else MaterialTheme.colorScheme.onSecondary
+        checkColor = if (todo.completed) Color(0xFF006400) else Color.Black
     )
 
 }
