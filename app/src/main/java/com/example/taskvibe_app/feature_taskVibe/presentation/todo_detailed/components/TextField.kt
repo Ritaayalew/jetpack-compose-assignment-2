@@ -1,4 +1,4 @@
-package com.example.taskvibe_app.feature_taskVibe.presentation.todo_new_update.components
+package com.example.taskvibe_app.feature_taskVibe.presentation.todo_detailed.components
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth

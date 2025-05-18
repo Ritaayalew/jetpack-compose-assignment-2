@@ -1,4 +1,4 @@
-package com.example.taskvibe_app.feature_taskVibe.presentation.todo_new_update
+package com.example.taskvibe_app.feature_taskVibe.presentation.todo_detailed
 
 import com.example.taskvibe_app.feature_taskVibe.domain.model.TodoItem
 

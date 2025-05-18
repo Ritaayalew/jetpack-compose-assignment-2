@@ -1,4 +1,4 @@
-package com.example.taskvibe_app.feature_taskVibe.presentation.todo_new_update
+package com.example.taskvibe_app.feature_taskVibe.presentation.todo_detailed
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -29,7 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.example.taskvibe_app.feature_taskVibe.presentation.todo_new_update.components.DetailedTodoCard
+import com.example.taskvibe_app.feature_taskVibe.presentation.todo_detailed.components.DetailedTodoCard
 import com.example.taskvibe_app.ui.theme.TaskVibe_AppTheme
 import kotlinx.coroutines.flow.collectLatest
 

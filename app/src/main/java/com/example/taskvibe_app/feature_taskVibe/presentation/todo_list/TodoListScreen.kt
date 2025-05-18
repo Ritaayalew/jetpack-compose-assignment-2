@@ -103,7 +103,6 @@ fun TodoListScreen(
                                 modifier = Modifier
                                     .fillMaxWidth(),
                                 onCompleteClick = {
-                                    // Handle completion toggle (add to ViewModel if needed)
                                 },
                                 onCardClick = {
                                     navController.navigate(Screen.TodoDetailedScreen.route + "?todoId=${todo.id}")

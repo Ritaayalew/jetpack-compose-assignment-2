@@ -3,15 +3,9 @@ package com.example.taskvibe_app
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -20,7 +14,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.taskvibe_app.feature_taskVibe.presentation.todo_list.TodoListScreen
 import com.example.taskvibe_app.feature_taskVibe.presentation.todo_list.TodoListViewModel
-import com.example.taskvibe_app.feature_taskVibe.presentation.todo_new_update.TodoDetailedScreen
+import com.example.taskvibe_app.feature_taskVibe.presentation.todo_detailed.TodoDetailedScreen
 import com.example.taskvibe_app.feature_taskVibe.presentation.util.Screen
 import com.example.taskvibe_app.ui.theme.TaskVibe_AppTheme
 import dagger.hilt.android.AndroidEntryPoint
