@@ -1,6 +1,5 @@
 package com.example.taskvibe_app.feature_taskVibe.presentation.todo_list
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -10,15 +9,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
@@ -32,7 +24,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
@@ -41,9 +32,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.example.taskvibe_app.R
 import com.example.taskvibe_app.feature_taskVibe.presentation.todo_list.components.TodoItemCard
-import com.example.taskvibe_app.feature_taskVibe.presentation.todo_new_update.TodoNewUpdateEvent
 import com.example.taskvibe_app.feature_taskVibe.presentation.util.Screen
 import com.example.taskvibe_app.ui.theme.TaskVibe_AppTheme
 
@@ -117,7 +106,7 @@ fun TodoListScreen(
                                     // Handle completion toggle (add to ViewModel if needed)
                                 },
                                 onCardClick = {
-                                    navController.navigate(Screen.TodoNewUpdateScreen.route + "?todoId=${todo.id}")
+                                    navController.navigate(Screen.TodoDetailedScreen.route + "?todoId=${todo.id}")
                                 }
                             )
                         }

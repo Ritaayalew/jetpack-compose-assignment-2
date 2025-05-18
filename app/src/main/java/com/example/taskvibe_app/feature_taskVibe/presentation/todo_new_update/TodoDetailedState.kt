@@ -2,7 +2,7 @@ package com.example.taskvibe_app.feature_taskVibe.presentation.todo_new_update
 
 import com.example.taskvibe_app.feature_taskVibe.domain.model.TodoItem
 
-data class TodoNewUpdateState(
+data class TodoDetailedState(
     val isTitleHintVisible: Boolean = true,
     val isDescriptionHintVisible: Boolean = true,
     val todo: TodoItem = TodoItem(

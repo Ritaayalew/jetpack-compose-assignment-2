@@ -20,7 +20,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.taskvibe_app.feature_taskVibe.presentation.todo_list.TodoListScreen
 import com.example.taskvibe_app.feature_taskVibe.presentation.todo_list.TodoListViewModel
-import com.example.taskvibe_app.feature_taskVibe.presentation.todo_new_update.TodoNewUpdateScreen
+import com.example.taskvibe_app.feature_taskVibe.presentation.todo_new_update.TodoDetailedScreen
 import com.example.taskvibe_app.feature_taskVibe.presentation.util.Screen
 import com.example.taskvibe_app.ui.theme.TaskVibe_AppTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -49,7 +49,7 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                         composable(
-                            route = Screen.TodoNewUpdateScreen.route + "?todoId={todoId}",
+                            route = Screen.TodoDetailedScreen.route + "?todoId={todoId}",
                             arguments = listOf(
                                 navArgument(
                                     name = "todoId"
@@ -59,7 +59,7 @@ class MainActivity : ComponentActivity() {
                                 }
                             )
                         ){
-                            TodoNewUpdateScreen(
+                            TodoDetailedScreen(
                                 navController = navController,
                             )
                         }

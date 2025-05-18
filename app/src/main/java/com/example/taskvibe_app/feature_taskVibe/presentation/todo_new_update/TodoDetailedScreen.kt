@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -17,8 +16,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -27,7 +24,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -39,9 +35,9 @@ import kotlinx.coroutines.flow.collectLatest
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TodoNewUpdateScreen(
+fun TodoDetailedScreen(
     navController: NavController,
-    viewModel: TodoNewUpdateViewModel = hiltViewModel()
+    viewModel: TodoDetailedViewModel = hiltViewModel()
 ) {
     val state = viewModel.state.value
     val snackbarHostState = remember { SnackbarHostState() }
@@ -49,13 +45,13 @@ fun TodoNewUpdateScreen(
     LaunchedEffect(key1 = true) {
         viewModel.eventFlow.collectLatest { event ->
             when (event) {
-                TodoNewUpdateViewModel.UiEvent.Back -> {
+                TodoDetailedViewModel.UiEvent.Back -> {
                     navController.navigateUp()
                 }
-                TodoNewUpdateViewModel.UiEvent.SaveTodo -> {
+                TodoDetailedViewModel.UiEvent.SaveTodo -> {
                     // No-op: Save functionality removed
                 }
-                is TodoNewUpdateViewModel.UiEvent.ShowSnackbar -> {
+                is TodoDetailedViewModel.UiEvent.ShowSnackbar -> {
                     snackbarHostState.showSnackbar(
                         message = event.message
                     )
@@ -81,7 +77,7 @@ fun TodoNewUpdateScreen(
                     navigationIcon = {
                         IconButton(
                             onClick = {
-                                viewModel.onEvent(TodoNewUpdateEvent.Back)
+                                viewModel.onEvent(TodoDetailedEvent.Back)
                             },
                             modifier = Modifier.padding(start = 8.dp)
                         ) {

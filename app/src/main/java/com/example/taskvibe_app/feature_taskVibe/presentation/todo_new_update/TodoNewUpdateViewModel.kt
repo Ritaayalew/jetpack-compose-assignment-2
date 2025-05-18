@@ -16,13 +16,13 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class TodoNewUpdateViewModel @Inject constructor(
+class TodoDetailedViewModel @Inject constructor(
     private val todoUseCases: TodoUseCases,
     savedStateHandle: SavedStateHandle,
     @IoDispatcher private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
-    private val _state = mutableStateOf(TodoNewUpdateState())
-    val state: State<TodoNewUpdateState> = _state
+    private val _state = mutableStateOf(TodoDetailedState())
+    val state: State<TodoDetailedState> = _state
 
     private val errorHandler = CoroutineExceptionHandler {_, e ->
         e.printStackTrace()
@@ -66,20 +66,20 @@ class TodoNewUpdateViewModel @Inject constructor(
     }
 
 
-    fun onEvent(event: TodoNewUpdateEvent){
+    fun onEvent(event: TodoDetailedEvent){
         when(event){
-            TodoNewUpdateEvent.Back -> {
+            TodoDetailedEvent.Back -> {
                 viewModelScope.launch (dispatcher + errorHandler){
                     _eventFlow.emit(UiEvent.Back)
                 }
             }
-            is TodoNewUpdateEvent.ChangedTitleFocus -> {
+            is TodoDetailedEvent.ChangedTitleFocus -> {
                 val shouldTitleHintBeVisible = !event.focusState.isFocused && _state.value.todo.title.isBlank()
                 _state.value = _state.value.copy(
                     isTitleHintVisible = shouldTitleHintBeVisible
                 )
             }
-            is TodoNewUpdateEvent.EnteredTitle -> {
+            is TodoDetailedEvent.EnteredTitle -> {
                 _state.value = _state.value.copy(
                     todo = _state.value.todo.copy(
                         title = event.value
